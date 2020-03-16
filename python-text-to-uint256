@@ -1,0 +1,71 @@
+ = str(input('')) #should be text, only lowercase, space, ., ,, ', !
+i = 0;
+output = ''
+while i < 51:
+    if n[i] == '':
+        output += '00000'
+    elif n[i] == 'a':
+        output += '00001'
+    elif n[i] == 'b':
+        output += '00010'
+    elif n[i] == 'c':
+        output += '00011'
+    elif n[i] == 'd':
+        output += '00100'
+    elif n[i] == 'e':
+        output += '00101'
+    elif n[i] == 'f':
+        output += '00110'
+    elif n[i] == 'g':
+        output += '00111'
+    elif n[i] == 'h':
+        output += '01000'
+    elif n[i] == 'i':
+        output += '01001'
+    elif n[i] == 'j':
+        output += '01010'
+    elif n[i] == 'k':
+        output += '01011'
+    elif n[i] == 'l':
+        output += '01100'
+    elif n[i] == 'm':
+        output += '01101'
+    elif n[i] == 'n':
+        output += '01110'
+    elif n[i] == 'o':
+        output += '01111'
+    elif n[i] == 'p':
+        output += '10000'
+    elif n[i] == 'q':
+        output += '10001'
+    elif n[i] == 'r':
+        output += '10010'
+    elif n[i] == 's':
+        output += '10011'
+    elif n[i] == 't':
+        output += '10100'
+    elif n[i] == 'u':
+        output += '10101'
+    elif n[i] == 'v':
+        output += '10110'
+    elif n[i] == 'w':
+        output += '10111'
+    elif n[i] == 'x':
+        output += '11000'
+    elif n[i] == 'y':
+        output += '11001'
+    elif n[i] == 'z':
+        output += '11010'
+    elif n[i] == '.':
+        output += '11011'
+    elif n[i] == ',':
+        output += '11100'
+    elif n[i] == '?':
+        output += '11101'
+    elif n[i] == ' ':
+        output += '11110'
+    elif n[i] == '!':
+        output += '11111'
+    i += 1
+output += '0'
+print(int(output, 2))

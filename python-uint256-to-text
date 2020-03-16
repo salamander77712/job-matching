@@ -1,0 +1,73 @@
+n = int(input('')) #should be int validated, >= 0, <=  2^256 -1
+n = str(bin(n))
+output = ''
+i = 0
+tmp = ''
+while i < 255:
+    tmp1 = n[i:i + 5]
+    if tmp == '00000':
+        output += ''
+    elif tmp == '00001':
+        output += 'a'
+    elif tmp == '00010':
+        output += 'b'
+    elif tmp == '00011':
+        output += 'c'
+    elif tmp == '00100':
+        output += 'd'
+    elif tmp == '00101':
+        output += 'e'
+    elif tmp == '00110':
+        output += 'f'
+    elif tmp == '00111':
+        output += 'g'
+    elif tmp == '01000':
+        output += 'h'
+    elif tmp == '01001':
+        output += 'i'
+    elif tmp == '01010':
+        output += 'j'
+    elif tmp == '01011':
+        output += 'k'
+    elif tmp == '01100':
+        output += 'l'
+    elif tmp == '01101':
+        output += 'm'
+    elif tmp == '01110':
+        output += 'n'
+    elif tmp == '01111':
+        output += 'o'
+    elif tmp == '10000':
+        output += 'p'
+    elif tmp == '10001':
+        output += 'q'
+    elif tmp == '10010':
+        output += 'r'
+    elif tmp == '10011':
+        output += 's'
+    elif tmp == '10100':
+        output += 't'
+    elif tmp == '10101':
+        output += 'u'
+    elif tmp == '10110':
+        output += 'v'
+    elif tmp == '10111':
+        output += 'w'
+    elif tmp == '11000':
+        output += 'x'
+    elif tmp == '11001':
+        output += 'y'
+    elif tmp == '11010':
+        output += 'z'
+    elif tmp == '11011':
+        output += '.'
+    elif tmp == '11100':
+        output += ','
+    elif tmp == '11101':
+        output += '?'
+    elif tmp == '11110':
+        output += ' '
+    elif tmp == '11111':
+        output += '!'
+    i += 5
+print(output)

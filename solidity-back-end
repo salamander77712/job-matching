@@ -1,0 +1,141 @@
+pragma solidity >=0.5.0 <0.6.0;
+import "./ownable.sol";
+
+contract JobMatch is Ownable{
+    
+    struct Employee{
+        uint firstName;
+        uint lastName;
+        uint16 zipCode;
+        uint8 degreeType;
+        uint8 experience;
+        
+    }
+    struct Employer{
+        uint name;
+    }
+    struct Listing{
+        uint name;
+        uint category;
+        uint24 salaryLow;
+        uint24 salaryHigh;
+        uint16 zipCode;
+        uint8 degreeType;
+        uint8 experience;
+    }
+    
+    mapping (address => uint) addressToEmployee;
+    mapping (address => uint) addressToEmployer;
+    mapping (uint => uint) listingToEmployer;
+    mapping (uint => uint[]) employerToListings;
+    
+    Employee[] public employees;
+    Employer[] public employers;
+    Listing[] public listings;
+    
+    modifier isEmployer(uint id){
+        require(listingToEmployer[id] == addressToEmployer[msg.sender]);
+        _;
+    }
+    
+    function createEmployee(uint firstName, uint lastName, uint16 zipcode, uint8 degreeType, uint8 experience) public{
+        require(addressToEmployee[msg.sender] == 0x0);
+       uint id = employees.push(Employee(firstName, lastName, zipcode, degreeType, experience));
+       addressToEmployee[msg.sender] = id;
+    }
+    function createEmployer(uint name) public{
+        require(addressToEmployer[msg.sender] == 0x0);
+        uint id = employers.push(Employer(name));
+        addressToEmployer[msg.sender] == id;
+    }
+    function createListing(uint name, uint category, uint24 salaryLow, uint24 salaryHigh, uint16 zipCode, uint8 degreeType, uint8 experience) public{
+        require(addressToEmployer[msg.sender] != 0x0);
+        uint id = listings.push(Listing(name, category, salaryLow, salaryHigh, zipCode, degreeType, experience));
+        listingToEmployer[id] = addressToEmployer[msg.sender];
+        employerToListings[addressToEmployer[msg.sender]].push(id);
+    }
+    
+    function updateEmployeeFirstName(uint name) public{
+        employees[addressToEmployee[msg.sender]].firstName = name;
+    }
+    function updateEmployeeLastName(uint name) public{
+        employees[addressToEmployee[msg.sender]].lastName = name;
+    }
+    function updateEmployeeZipCode(uint16 code) public{
+        employees[addressToEmployee[msg.sender]].zipCode = code;
+    }
+    function updateEmployeeDegreeType(uint8 degree) public{
+        employees[addressToEmployee[msg.sender]].degreeType = degree;
+    }
+    function updateEmployeeExperience(uint8 experience) public{
+        employees[addressToEmployee[msg.sender]].experience = experience;
+    }
+    
+    function updateEmployerName(uint name) public{
+        employers[addressToEmployer[msg.sender]].name = name;
+    }
+    
+    function updateListingName(uint id, uint name) public isEmployer(id){
+        listings[id].name = name;
+    }
+    function updateListingCategory(uint id, uint category) public isEmployer(id){
+        listings[id].category = category;
+    }
+    function updateListingSalaryLow(uint id, uint24 salary) public isEmployer(id){
+        listings[id].salaryLow = salary;
+    }
+    function updateListingSalaryHigh(uint id, uint24 salary) public isEmployer(id){
+        listings[id].salaryHigh = salary;
+    }
+    function updateListingZipCode(uint id, uint16 code) public isEmployer(id){
+        listings[id].zipCode = code;
+    }
+    function updateListingnamDegreeType(uint id, uint8 degree) public isEmployer(id){
+        listings[id].degreeType = degree;
+    }
+    function updateListingnamExperience(uint id, uint8 experience) public isEmployer(id){
+        listings[id].experience = experience;
+    }
+    
+    function viewEmployeeFirstName(uint id) external view returns(uint){
+        return(employees[id].firstName);
+    }
+    function viewEmployeeLastName(uint id) external view returns(uint){
+        return(employees[id].lastName);
+    }
+    function viewEmployeeZipCode(uint id) external view returns(uint16){
+        return(employees[id].zipCode);
+    }
+    function viewEmployeeDegreeType(uint id) external view returns(uint8){
+        return(employees[id].degreeType);
+    }
+    function viewEmployeeExperience(uint id) external view returns(uint8){
+        return(employees[id].experience);
+    }
+    
+    function viewEmployerName(uint id) external view returns(uint){
+        return(employers[id].name);
+    }
+    
+    function viewListingName(uint id) external view returns(uint){
+        return(listings[id].name);
+    }
+    function viewListingCategory(uint id) external view returns(uint){
+        return(listings[id].category);
+    }
+    function viewListingSalaryLow(uint id) external view returns(uint24){
+        return(listings[id].salaryLow);
+    }
+    function viewListingSalaryHigh(uint id) external view returns(uint24){
+        return(listings[id].salaryHigh);
+    }
+    function viewListingZipCode(uint id) external view returns(uint16){
+        return(listings[id].zipCode);
+    }
+    function viewListingDegreeType(uint id) external view returns(uint8){
+        return(listings[id].degreeType);
+    }
+    function viewListingExperience(uint id) external view returns(uint8){
+        return(listings[id].experience);
+    }
+}
